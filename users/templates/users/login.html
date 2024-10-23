@@ -1,0 +1,21 @@
+{% extends 'javerly/base.html' %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-6 mx-auto">
+        <div class="card bg-body p-2 bg-opacity-50">
+            <div class="card-body">
+                <h2 class="mb-3">Вход</h2>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-success">
+                        Вход
+                    </button>
+                </form>
+                <a class="btn btn-light mt-3 me-3 py-2 text-dark text-decoration-none" href="{% url 'users:recovery' %}">Восстановить пароль</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
