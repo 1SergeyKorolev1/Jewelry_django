@@ -1,0 +1,110 @@
+:root {
+  --color1: #05b1b1;
+  --color2: #52339a;
+  --color3: #fcff6b;
+  --color4: #ff7f04;
+}
+
+section {
+  padding: 100px 0;
+}
+
+footer {
+  padding: 20px 0;
+}
+
+header {
+  padding: 110px 0;
+}
+
+header,
+footer {
+  /* ниже используется код с сайта colorzilla : https://www.colorzilla.com/gradient-editor/ */
+  background: url(../../media/pattern.png), var(--color3);
+  background: url(../../media/pattern.png),
+    -moz-linear-gradient(left, var(--color3) 0%, var(--color4) 100%);
+  background: url(../../media/pattern.png),
+    -webkit-linear-gradient(left, var(--color3) 0%, var(--color4) 100%);
+  background: url(../../media/pattern.png),
+    linear-gradient(to right, var(--color3) 0%, var(--color4) 100%);
+  filter: url(../../media/pattern.png),
+    progid:
+      DXImageTransform.Microsoft.gradient(
+        startColorstr= "#fcff6b",
+        endColorstr= "#ff7f04",
+        GradientType=1
+      );
+  background-size: contain;
+}
+
+.jewelry_play {
+  /* background-color: var(--color4); */
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  border: 2px solid #dddfdf6d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 30px auto;
+  transition: all 1s ease;
+}
+
+.jewelry_play:hover {
+  background-color: var(--color3);
+  rotate: 360deg;
+}
+
+.jewelry_triangle {
+  width: 30px;
+  height: 30px;
+  background-image: url(../../media/kontacts.svg);
+  background-size: contain;
+
+  /* 
+  код ниже делает треугольник
+  margin-right: -4px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 0 10px 20px;
+  border-color: transparent transparent transparent var(--bs-white); */
+}
+
+.btn-jewelry {
+  display: block;
+  max-width: 200px;
+  margin: 0 auto;
+  padding: 8px, 30px;
+  color: var(--color3);
+  background-color: var(--color4);
+  transition: all 1s ease;
+}
+
+.submit-button {
+  display: block;
+  max-width: 160px;
+  margin: 0 auto;
+  padding: 8px, 30px;
+  color: var(--color3);
+  background-color: var(--color4);
+  transition: all 1s ease;
+}
+
+.carousel-start {
+  margin: -70px auto;
+  max-width: 500px;
+}
+
+.form-calculator {
+  max-width: 420px;
+  margin: auto;
+}
+
+.image-calculate {
+  margin: 10px auto;
+  max-width: 100px;
+}
+
+
