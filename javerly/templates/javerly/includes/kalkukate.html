@@ -1,14 +1,29 @@
 <section>
-      <div class="row">
+    <div class="row">
         <div class="coll-12">
-          <h2 class="text-center">Подсчет стоимости изделия</h2>
-          <div class="row">
-            <img
-              src="../../media/calculate.png"
-              alt="калькулятор"
-              class="image-calculate"
-            />
-          </div>
+            <h2 class="text-center">Подсчет стоимости услуг</h2>
+            <div class="row">
+                <img
+                        src="../../media/calculate.png"
+                        alt="калькулятор"
+                        class="image-calculate"
+                />
+            </div>
         </div>
-      </div>
+    </div>
 </section>
+{% if user.is_authenticated %}
+<div style="width: 600px; margin: auto; margin-bottom: 50px; margin-top: -70px;">
+    <div class="d-grid gap-2 block-button">
+        <button class="btn btn-warning" type="button">Продать</button>
+        <button class="btn btn-warning" type="button">Изготовить</button>
+        <button class="btn btn-warning" type="button">Отремонтировать</button>
+        <button class="btn btn-warning" type="button">Другое</button>
+    </div>
+</div>
+{% else %}
+<div style="width: 600px; margin: auto; margin-bottom: 50px; margin-top: -70px;">
+    <p>После авторизации на сайте - здесь появится возможность посчитать стоимость продажи, изготовления, ремонта - или
+        описать ваш заказ более подробно...</p>
+</div>
+{% endif %}
