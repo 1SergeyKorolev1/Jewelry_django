@@ -1,6 +1,6 @@
 import secrets
 from random import randint
-
+from django.contrib.auth.mixins import LoginRequiredMixin
 from config.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
@@ -42,7 +42,7 @@ def email_verification(request, token):
     user.save()
     return redirect(reverse('users:login'))
 
-class ProfileView(UpdateView):
+class ProfileView(LoginRequiredMixin, UpdateView):
     model = User
     form_class = UserProfileForm
     success_url = reverse_lazy('users:profile')
