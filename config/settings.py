@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     'javerly',
     'users',
+    'services',
 ]
 
 MIDDLEWARE = [

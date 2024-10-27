@@ -15,6 +15,7 @@
             <button class="py-2 text-dark text-decoration-none btn btn-link" type="submit">Выйти</button>
         </form>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'users:profile' %}">Профиль</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'services:all_calculations' %}">Расчеты</a>
         {% else %}
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'users:login' %}">Войти</a>
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'users:register' %}">Регистрация</a>

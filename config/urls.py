@@ -23,4 +23,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('javerly.urls', namespace='javerly')),
     path('users/', include('users.urls', namespace='users')),
+    path('services/', include('services.urls', namespace='services')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

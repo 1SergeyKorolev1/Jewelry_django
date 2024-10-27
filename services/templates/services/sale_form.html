@@ -1,0 +1,24 @@
+{% extends 'javerly/base.html' %}
+{% load my_tags %}
+{% block content %}
+<div class="row mt-5">
+    <div class="col-6 mx-auto">
+        <div class="card bg-body p-2 bg-opacity-50">
+            <div class="card-body">
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center col-10">
+                    <h3>Рассчитать стоимость продажи</h3>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-warning">
+                        Рассчитать
+                    </button>
+                </form>
+                <p class="text-center mt-3">При продаже на сумму более 2000руб. Мы приедем сами! Если вы находитесь в
+                    пределах города Рыбинска...</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

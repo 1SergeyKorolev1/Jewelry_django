@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
                 ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
                 ('email', models.EmailField(max_length=254, unique=True, verbose_name='почта')),
                 ('phone', models.CharField(blank=True, max_length=35, null=True, verbose_name='телефон')),
-                ('avatar', models.ImageField(blank=True, null=True, upload_to='users/avatars/', verbose_name='аватар')),
+                ('avatar', models.ImageField(blank=True, null=True, upload_to='services/avatars/', verbose_name='аватар')),
                 ('country', models.CharField(blank=True, max_length=50, null=True, verbose_name='страна')),
                 ('token', models.CharField(blank=True, max_length=150, null=True, verbose_name='токен')),
                 ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),

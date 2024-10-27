@@ -9,7 +9,7 @@
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
-    <title>Jewelry Рыбинск</title>
+    <title>{{ title_name|title }}</title>
 </head>
 <body>
 <header>
@@ -17,7 +17,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <h1 class="text-center text-white">Jewelry Рыбинск</h1>
+                <h1 class="text-center text-white">{{ title_name|title }}</h1>
                 <div
                         class="jewelry_play"
                         data-bs-toggle="modal"
@@ -36,7 +36,35 @@
     {% endblock %}
 </header>
 {% include 'javerly/includes/carusel.html' %}
-{% include 'javerly/includes/kalkukate.html' %}
+<section>
+    <div class="row">
+        <div class="coll-12">
+            <h2 class="text-center">Подсчет стоимости услуг</h2>
+            <div class="row">
+                <img
+                        src="../../media/calculate.png"
+                        alt="калькулятор"
+                        class="image-calculate"
+                />
+            </div>
+        </div>
+    </div>
+</section>
+{% if user.is_authenticated %}
+<div style="max-width: 600px; margin: auto; margin-bottom: 50px; margin-top: -70px;">
+    <div class="d-grid gap-2 block-button">
+        <a class="btn btn-warning py-2 text-dark text-decoration-none" href="{% url 'services:sale' %}">Продать</a>
+        <button class="btn btn-warning" type="button">Изготовить</button>
+        <button class="btn btn-warning" type="button">Отремонтировать</button>
+        <button class="btn btn-warning" type="button">Другое</button>
+    </div>
+</div>
+{% else %}
+<div style="width: 600px; margin: auto; margin-bottom: 50px; margin-top: -70px;">
+    <p>После авторизации на сайте - здесь появится возможность посчитать стоимость продажи, изготовления, ремонта - или
+        описать ваш заказ более подробно...</p>
+</div>
+{% endif %}
 <footer class="text-body-secondary py-5 col-12 mx-auto" id="footer">
     {% include 'javerly/includes/footer.html' %}
 </footer>

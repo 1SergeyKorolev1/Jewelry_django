@@ -8,7 +8,7 @@ class JaverlyView(View):
     @staticmethod
     def get(request):
         context = {
-            'title_name': 'javerly',
+            'title_name': 'Jewelry Рыбинск',
         }
 
         return render(request, 'javerly/base.html', context)

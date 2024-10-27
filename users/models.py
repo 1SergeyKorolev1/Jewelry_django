@@ -6,11 +6,15 @@ NULLABLE = {'blank': True, 'null': True}
 # Create your models here.
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, verbose_name='почта')
+    email = models.EmailField(
+        unique=True,
+        verbose_name='почта',
+        error_messages='Укажите действующий email на него придет сообщение с ссылкой для подтверждения'
+    )
 
     phone = models.CharField(max_length=35, verbose_name='телефон', **NULLABLE)
     avatar = models.ImageField(upload_to='users/avatars/', verbose_name='аватар', **NULLABLE)
-    country = models.CharField(max_length=50, verbose_name='страна', **NULLABLE)
+    city = models.CharField(max_length=50, verbose_name='город', **NULLABLE)
 
     token = models.CharField(max_length=150, verbose_name='токен', **NULLABLE)
 
