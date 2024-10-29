@@ -32,10 +32,8 @@ def get_sale_price(material, weight, sample_gold, sample_silver, sample_platinum
     if material == 'gold':
         if sample_gold == 'none':
             result = weight * gold_samples['500/555']
-            print('работает')
         else:
             result = weight * gold_samples[sample_gold]
-            print('круто')
     elif material == 'silver':
         if sample_silver == 'none':
             result = weight * silver_samples['600']
