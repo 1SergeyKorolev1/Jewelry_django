@@ -5,4 +5,4 @@ from users.forms import StyleFormMixin
 class SaleFormCreate(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Sale
-        fields = ('material', 'weight')
+        fields = ('material', 'weight', 'sample_gold', 'sample_silver', 'sample_platinum')

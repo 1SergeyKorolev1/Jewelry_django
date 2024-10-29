@@ -1,12 +1,13 @@
 {% extends 'javerly/base.html' %}
 {% load my_tags %}
 {% block content %}
-<div class="card bg-body bg-opacity-50 mx-auto text-center col-10 mt-5" style="padding: 0 20px 0 20px;">
+<div class="card bg-body bg-opacity-50 mx-auto text-center col-10 mt-5"
+     style="padding: 0 20px 0 20px; max-width: 850px;">
     <h2 class="display-5 fw-normal mt-4">{{ title_name_services|title }}</h2>
     <div class="row p-2">
         {% if not sale_list %}
         <a type="button" class="btn btn-sm btn-outline-secondary"
-           href=#footer">Добавьте первый расчет</a>
+           href="#footer">Добавьте первый расчет</a>
         {% else %}
         <p>Расчеты на продажу лома:</p>
         {% for sale in sale_list %}
@@ -16,6 +17,14 @@
                 <p class="m-0">Стоимость продажи:</p>
                 <p>{{ sale.result }} руб.</p>
             </div>
+            <a
+                    href="{% url 'services:delete_sale' sale.pk %}"
+                    type="button"
+                    class="btn-close bg-danger"
+                    aria-label="Close"
+                    style="margin: -35px 0 5px -6px;"
+                    title="Удалить"
+            ></a>
         </div>
         {% endfor %}
         {% endif %}
