@@ -1,6 +1,7 @@
 {% extends 'javerly/base.html' %}
 {% load my_tags %}
 {% block content %}
+{% load static %}
 <div class="row mt-5">
     <div class="col-6 mx-auto">
         <div class="card bg-body p-2 bg-opacity-50">
@@ -26,4 +27,5 @@
         </div>
     </div>
 </div>
+<script src="{% static 'js/user_form.js' %}"></script>
 {% endblock %}

@@ -3,6 +3,7 @@ from django.forms import BooleanField
 from users.models import User
 from django import forms
 
+from django.forms import ImageField, FileInput
 class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -18,6 +19,7 @@ class UserRegisterForm(StyleFormMixin, UserCreationForm):
         fields = ('email', 'password1', 'password2')
 
 class UserProfileForm(StyleFormMixin, UserChangeForm):
+    avatar = ImageField(widget=FileInput)
 
     class Meta:
         model = User
