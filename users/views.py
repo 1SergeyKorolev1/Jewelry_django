@@ -18,6 +18,7 @@ class RegisterView(CreateView):
     form_class = UserRegisterForm
     template_name = 'users/register.html'
     success_url = reverse_lazy('users:login')
+    success_message = "Перейдите на почту для подтверждения..."
 
     def form_valid(self, form):
         user = form.save()
@@ -49,6 +50,14 @@ class ProfileView(LoginRequiredMixin, UpdateView):
 
     def get_object(self, queryset=None):
         return self.request.user
+
+    def form_valid(self, form):
+        user_ = User.objects.get(email=self.request.user.email)
+        profile = form.save()
+        if profile.avatar != user_.avatar:
+            user_.avatar.delete(False)
+        return super().form_valid(form)
+
 
 def recovery_password(request):
     if request.method == "POST":

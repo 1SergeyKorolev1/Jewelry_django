@@ -31,6 +31,9 @@ class User(AbstractUser):
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
 
+    def unique_error_message(self, model_class, unique_check):
+        return 'Пользователь с такой почтой уже зарегистрирован!..'
+
     def __str__(self):
         # Строковое отображение объекта
         return f'{self.email}'
@@ -38,9 +41,3 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Пользователи'  # Настройка для наименования набора объектов
-
-@receiver(pre_save, sender=AUTH_USER_MODEL)
-def image_model_delete(sender, instance, **kwargs):
-    user_ = User.objects.get(email=instance.email)
-    if user_.avatar:
-        user_.avatar.delete(False)
