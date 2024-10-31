@@ -51,6 +51,16 @@ footer {
   transition: all 1s ease;
 }
 
+.jewelry_play_del {
+  cursor: pointer;
+  transition: all 1s ease;
+}
+
+.jewelry_play_del:hover {
+  background-color: var(--color3);
+  rotate: 360deg;
+}
+
 .jewelry_play:hover {
   background-color: var(--color3);
   rotate: 360deg;
