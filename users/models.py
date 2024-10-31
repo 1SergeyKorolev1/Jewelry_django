@@ -35,7 +35,6 @@ class User(AbstractUser):
         # Строковое отображение объекта
         return f'{self.email}'
 
-
     class Meta:
         verbose_name = 'Пользователь'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Пользователи'  # Настройка для наименования набора объектов
