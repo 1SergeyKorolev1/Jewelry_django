@@ -1,6 +1,9 @@
 from django_resized import ResizedImageField
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.signals import pre_delete, pre_save
+from django.dispatch.dispatcher import receiver
+from config.settings import AUTH_USER_MODEL
 
 NULLABLE = {'blank': True, 'null': True}
 _MAX_SIZE = 300
@@ -36,3 +39,9 @@ class User(AbstractUser):
     class Meta:
         verbose_name = 'Пользователь'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Пользователи'  # Настройка для наименования набора объектов
+
+@receiver(pre_save, sender=AUTH_USER_MODEL)
+def image_model_delete(sender, instance, **kwargs):
+    user_ = User.objects.get(email=instance.email)
+    if user_.avatar:
+        user_.avatar.delete(False)
