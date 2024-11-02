@@ -47,8 +47,7 @@ class MakingDeleteView(LoginRequiredMixin, DeleteView):
     success_url = reverse_lazy('services:all_calculations')
 
     def form_valid(self, form):
-        making = Making.objects.get(owner=self.request.user)
-        print(making.image_one)
+        making = self.object
         making.image_one.delete(False)
         making.image_two.delete(False)
         return super().form_valid(form)
