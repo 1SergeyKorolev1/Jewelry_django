@@ -1,4 +1,5 @@
 from django.db import models
+from django_resized import ResizedImageField
 
 from users.models import User
 
@@ -111,3 +112,56 @@ class Sale(models.Model):
     class Meta:
         verbose_name = 'Продажа'  # Настройка для наименования одного объекта
         verbose_name_plural = 'Продажи'  # Настройка для наименования набора объектов
+
+
+class Making(models.Model):
+    material = models.CharField(
+        default=materials['gold'],
+        max_length=150,
+        verbose_name='выберите материал',
+        help_text='',
+        choices=materials,
+        error_messages='Поле обязательно для заполнения'
+    )
+    weight = models.FloatField(
+        verbose_name='вес в граммах',
+        help_text='',
+        error_messages='Укажите вес изделия в граммах'
+    )
+    description = models.TextField(
+        verbose_name='Опишите изделие / Прокомментируйте заказ',
+        max_length=300
+    )
+    image_one = ResizedImageField(
+        verbose_name='картинка с похожим изделием',
+        size=[600, 600],
+        quality=77,
+        upload_to='users/making/',
+    )
+    image_two = ResizedImageField(
+        verbose_name='картинка с похожим изделием',
+        size=[600, 600],
+        quality=77,
+        upload_to='users/making/',
+        **NULLABLE
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        help_text='укажите владельца',
+        verbose_name='владелец',
+        **NULLABLE
+    )
+    result = models.FloatField(
+        verbose_name='результат',
+        default=0,
+        **NULLABLE
+    )
+
+    def __str__(self):
+        # Строковое отображение объекта
+        return f'Материал: {self.material}.\nВес: {self.weight}г.'
+
+    class Meta:
+        verbose_name = 'Изготовление'  # Настройка для наименования одного объекта
+        verbose_name_plural = 'Изготовление'  # Настройка для наименования набора объектов

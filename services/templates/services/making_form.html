@@ -1,0 +1,34 @@
+{% extends 'javerly/base.html' %}
+{% load my_tags %}
+{% block content %}
+{% load static %}
+<div class="row mt-5 mr-3 ml-3">
+    <div class="col-6 mx-auto" style="width: 90%; max-width: 600px">
+        <div class="card bg-body p-2 bg-opacity-50">
+            <div class="card-body">
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center col-10">
+                    <h3>Примерный расчет стоимости изготовления</h3>
+                </div>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-warning">
+                        Рассчитать
+                    </button>
+                </form>
+                <p class="text-center mt-3">Указан расчет стоимость работы, без учёта металла. Изделия изготавливаем из
+                    материала заказчика.</p>
+                <p class="text-center mt-3 text-danger">Стоимость изготовления грамма изделия без учёта металла</p>
+                <p class="text-center mt-3 text-danger">Рассчитанная стоимость не точная.
+                <p class="text-center mt-3"> Зависит от сложности изделия, количества камней
+                    и веса. Чем больше вес изделия в цепях, тем стоимость работы за грамм меньше, если же вес в цепях меньше,
+                    стоимость работы больше. Каждое изделие уникально, конечную стоимость
+                    можно будет уточнить после предварительного расчета, либо по звонку.
+                </p>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/making_form.js' %}"></script>
+{% endblock %}

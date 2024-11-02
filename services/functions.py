@@ -26,6 +26,11 @@ platinum_samples = {
     '850': 2200,
     '800': 2100,
 }
+making_set = {
+    'gold': 1717,
+    'silver': 1513,
+    'platinum': 1919,
+}
 
 def get_sale_price(material, weight, sample_gold, sample_silver, sample_platinum,):
     result = 0
@@ -44,4 +49,10 @@ def get_sale_price(material, weight, sample_gold, sample_silver, sample_platinum
             result = weight * platinum_samples['800']
         else:
             result = weight * platinum_samples[sample_platinum]
+    return result
+
+def get_making_price(material, weight):
+    result = 0
+    if material:
+        result = weight * making_set[material]
     return result

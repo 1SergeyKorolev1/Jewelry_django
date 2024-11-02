@@ -1,7 +1,8 @@
+{% load static %}
 <div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom col-6 mx-auto">
     <a href="{% url 'javerly:home' %}" class="d-flex align-items-center text-dark text-decoration-none">
         <img
-                    src="../../media/logo.png"
+                    src="{% static 'logo_1.png' %}"
                     class="d-block w-50"
                     alt="..."
             />
