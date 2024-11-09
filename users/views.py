@@ -1,10 +1,9 @@
 import secrets
-from random import randint
 from django.contrib.auth.mixins import LoginRequiredMixin
 from config.settings import EMAIL_HOST_USER
 from django.core.mail import send_mail
 from django.urls import reverse_lazy, reverse
-
+from services.functions.get_random_number import get_random_number
 from users.forms import UserRegisterForm
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import CreateView, UpdateView, TemplateView
@@ -63,7 +62,7 @@ def recovery_password(request):
     if request.method == "POST":
         email = request.POST.get("email")
         user = User.objects.get(email=email)
-        new_password = "".join([str(randint(0, 9)) for i_ in range(8)])
+        new_password = get_random_number()
         send_mail(
             "Восстановление доступа",
             f"Ваш новый пароль : {new_password}",

@@ -157,6 +157,11 @@ class Making(models.Model):
         default=0,
         **NULLABLE
     )
+    number = models.CharField(
+        max_length=100,
+        verbose_name='номер заказа',
+        **NULLABLE
+    )
 
     def __str__(self):
         # Строковое отображение объекта

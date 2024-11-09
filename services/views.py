@@ -1,9 +1,18 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DeleteView
 from services.models import Sale, Making
 from services.forms import SaleFormCreate, MakingFormCreate
-from services.functions import get_sale_price, get_making_price
+from services.functions.functions_get_price import get_sale_price, get_making_price
+from services.functions.get_random_number import get_random_number
+
+from services.functions.number_order import (get_number_order_list,
+                                             set_number_order_list,
+                                             delete_number_in_order_list)
+
+from services.functions.vk_api_message import start_vk_bot
+
 
 class SaleCreate(LoginRequiredMixin, CreateView):
     model = Sale
@@ -50,6 +59,7 @@ class MakingDeleteView(LoginRequiredMixin, DeleteView):
         making = self.object
         making.image_one.delete(False)
         making.image_two.delete(False)
+        delete_number_in_order_list(making.number)
         return super().form_valid(form)
 
 class MakingCreate(LoginRequiredMixin, CreateView):
@@ -65,3 +75,29 @@ class MakingCreate(LoginRequiredMixin, CreateView):
             making.weight,
         )
         return super().form_valid(form)
+
+def get_number(r_, pk):
+    making_list_objects = Making.objects.all()
+    making_list_number = []
+    for m_ in making_list_objects:
+        if m_.number:
+            making_list_number.append(m_.number)
+
+    making = Making.objects.get(pk=pk)
+    if making.number:
+        pass
+    else:
+        random_number = get_random_number()
+        if random_number not in making_list_number:
+            making.number = random_number
+            set_number_order_list(random_number)
+        else:
+            making.number = random_number + random_number
+            set_number_order_list(random_number + random_number)
+        making.save()
+
+    return redirect(reverse('services:all_calculations'))
+
+def start_bot(r_):
+    start_vk_bot.delay()
+    return redirect(reverse('javerly:home'))

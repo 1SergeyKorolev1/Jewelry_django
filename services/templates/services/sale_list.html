@@ -34,18 +34,33 @@
         {% endif %}
         {% for making in making_list %}
         <div class="card bg-body bg-opacity-50 col m-2" style="min-width: 210px">
+            <a
+                    href="{% url 'services:get_number' making.pk %}"
+                    type="button"
+                    class="btn btn-outline-warning mt-1"
+                    style="padding: 0 6px; width: max-content; margin: auto"
+                    title="Получить номер заказа"
+            >Получить номер заказа</a>
             <img src="{{ making.image_one | media_filter }}" style="max-width: 185px; margin: 5px auto">
             <div class="text-center">
                 <p class="m-2">{{ making }}</p>
                 <p class="m-0">Стоимость изготовления:</p>
                 <p>{{ making.result }} руб.</p>
+                {% if making.number %}
+                <p class="text-primary">Заказ №{{ making.number }}</p>
+                <a
+                        href=""
+                        class="btn btn-outline-info mb-3"
+                        title="Подробности по заказу"
+                >Узнать подробности</a>
+                {% endif %}
             </div>
             <a
                     href="{% url 'services:delete_making' making.pk %}"
                     type="button"
                     class="jewelry_play_del btn-close bg-danger"
                     aria-label="Close"
-                    style="position: absolute; bottom: 3px; bottom: 3px; left: 3px;"
+                    style="position: absolute; bottom: 3px; left: 3px;"
                     title="Удалить"
             ></a>
         </div>

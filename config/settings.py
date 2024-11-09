@@ -155,3 +155,10 @@ EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL', False) == 'True'
 
 SERVER_EMAIL = EMAIL_HOST_USER
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+TOKEN_VK = os.getenv('TOKEN_VK')
+
+# URL-адрес брокера сообщений
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+# URL-адрес брокера результатов, также Redis
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+broker_connection_retry_on_startup = True
