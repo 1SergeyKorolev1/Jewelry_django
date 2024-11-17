@@ -22,7 +22,7 @@ def send_some_image(peer_id, image, user_id):
     with open(pathlib.Path(project_path, f'media/{image}'), 'rb') as img_:
         upload_img = upload.photo_messages(photos=[img_, ], peer_id=peer_id)[0]
         pic = 'photo{}_{}'.format(upload_img['owner_id'], upload_img['id'])
-        session_api.messages.send(user_id=user_id, random_id=get_random_id(), attachment=pic, message='Сообщение')
+        session_api.messages.send(user_id=user_id, random_id=get_random_id(), attachment=pic, message='')
 
 def get_help_message(info_):
     first_name = info_[0]['first_name']
@@ -34,8 +34,14 @@ def get_help_message(info_):
 
 def get_order_message(number):
     making = Making.objects.filter(number=number)
-    return (f'Заказ №{number} {making[0]} передан на рассмотрение мастеру.\n'
-            f'Ожидайте ответа(ответ придет в этой беседе)')
+    return (f'ЗАКАЗ\n'
+            f'Номер: №{number}\n'
+            f'Описание: {making[0].description}\n'
+            f'Материал: {making[0].material}\n'
+            f'Вес: {making[0].weight}г.\n'
+            f'Предварительная стоимость: {making[0].result}р.\n'
+            f'\nПередан на рассмотрение мастеру.\n'
+            f'Ожидайте ответа (ответ придет в этой беседе)')
 
 def get_order_image(number):
     making = Making.objects.filter(number=number)
@@ -56,5 +62,5 @@ def start_vk_bot():
                 if msg == 'мой id':
                     send_some_message(id_, f'Ваш vk id: {id_}')
                 if msg in get_number_order_list():
-                    send_some_message(id_, get_order_message(msg))
                     send_some_image(peer_id, get_order_image(msg), id_)
+                    send_some_message(id_, get_order_message(msg))
