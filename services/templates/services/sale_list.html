@@ -34,6 +34,7 @@
         {% endif %}
         {% for making in making_list %}
         <div class="card bg-body bg-opacity-50 col m-2" style="min-width: 210px">
+            {% if not making.number %}
             <a
                     href="{% url 'services:get_number' making.pk %}"
                     type="button"
@@ -41,6 +42,7 @@
                     style="padding: 0 6px; width: max-content; margin: auto"
                     title="Получить номер заказа"
             >Получить номер заказа</a>
+            {% endif %}
             <img src="{{ making.image_one | media_filter }}" style="max-width: 185px; margin: 5px auto">
             <div class="text-center">
                 <p class="m-2">{{ making }}</p>
