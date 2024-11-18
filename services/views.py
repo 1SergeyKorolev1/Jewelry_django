@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
-from django.views.generic import CreateView, ListView, DeleteView
+from django.views.generic import CreateView, ListView, DeleteView, DetailView
 from services.models import Sale, Making
 from services.forms import SaleFormCreate, MakingFormCreate
 from services.functions.functions_get_price import get_sale_price, get_making_price
@@ -97,6 +97,10 @@ def get_number(r_, pk):
         making.save()
 
     return redirect(reverse('services:all_calculations'))
+
+
+class MakingDtailView(LoginRequiredMixin, DetailView):
+    model = Making
 
 def start_bot(r_):
     start_vk_bot.delay()

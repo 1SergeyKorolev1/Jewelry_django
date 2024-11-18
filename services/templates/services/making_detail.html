@@ -1,0 +1,55 @@
+{% extends 'javerly/base.html' %}
+{% load my_tags %}
+{% block content %}
+{% load static %}
+<div class="card bg-body bg-opacity-50 mx-auto text-center col-10 mt-5"
+     style="padding: 0 20px 0 20px; max-width: 850px;">
+    <h2 class="text-warning mt-2" style="-webkit-text-stroke: 0.3px black">Ваш номер заказа:</h2>
+    <h2 class="display-5 fw-normal mt-2">{{ object.number }}</h2>
+    <div class="row p-2">
+
+        <div class="card bg-body bg-opacity-50 col m-2" style="min-width: 185px">
+            <div class="text-center" style="">
+                <p class="m-2 text-warning" style="-webkit-text-stroke: 0.3px black">{{ object }}</p>
+                <p class="m-0 text-warning" style="-webkit-text-stroke: 0.3px black">Приблизительная стоимость
+                    изготовления:</p>
+                <p class="text-warning" style="-webkit-text-stroke: 0.3px black">{{ object.result }} руб.</p>
+                <img src="{{ object.image_one | media_filter }}" class="col-2 rounded mt-1 mb-3"
+                     style="max-width: max-content; width: 70%">
+                <p class="text-info mb-0">Чтоб передать информацию о заказе в работу</p>
+                <p class="text-info mb-0">Вам понадобится - перейдите в нашу группу ВK</p>
+                <p class="text-info mb-0">И отправить сообщение с номером заказа</p>
+                <p class="text-info">Как показано на картинках ниже:</p>
+                <div class="block-button mb-3">
+                    <a class="btn btn-primary py-2 text-white text-decoration-none"
+                       href="https://vk.com/jewelry_in_rybinsk" target="_blank">Группа VK</a>
+                    <a class="btn btn-warning py-2 text-white text-decoration-none"
+                       href="{% url 'services:all_calculations' %}">Вернуться к расчетам</a>
+                </div>
+                <img src="{% static 'vk_inst.jpg' %}" class="col-2 rounded mt-1 mb-3"
+                     style="max-width: max-content; width: 70%">
+                <p class="text-info ">Отправьте сообщение с номером заказа БЕЗ ПРОБЕЛОВ</p>
+                <img src="{% static 'vk_inst_to.jpg' %}" class="col-2 rounded mt-1 mb-3"
+                     style="max-width: max-content; width: 70%">
+                <p class="text-info ">В ответ вы должны получить информационное сообщение</p>
+                <img src="{% static 'vk_inst_two.jpg' %}" class="col-2 rounded mt-1 mb-3"
+                     style="max-width: max-content; width: 70%">
+                <div class="block-button mb-3">
+                    <a class="btn btn-primary py-2 text-white text-decoration-none"
+                       href="https://vk.com/jewelry_in_rybinsk" target="_blank">Группа VK</a>
+                    <a class="btn btn-warning py-2 text-white text-decoration-none"
+                       href="{% url 'services:all_calculations' %}">Вернуться к расчетам</a>
+                </div>
+            </div>
+            <a
+                    href="{% url 'services:delete_making' object.pk %}"
+                    type="button"
+                    class="jewelry_play_del btn-close bg-danger"
+                    aria-label="Close"
+                    style="position: absolute; top: 3px; left: 3px;"
+                    title="Удалить"
+            ></a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -46,13 +46,13 @@
             <img src="{{ making.image_one | media_filter }}" style="max-width: 185px; margin: 5px auto">
             <div class="text-center">
                 <p class="m-2">{{ making }}</p>
-                <p class="m-0">Стоимость изготовления:</p>
+                <p class="m-0">Приблизительная стоимость изготовления:</p>
                 <p>{{ making.result }} руб.</p>
                 {% if making.number %}
-                <p class="text-primary">Заказ №{{ making.number }}</p>
+                <p class="text-warning">Заказ №{{ making.number }}</p>
                 <a
-                        href=""
-                        class="btn btn-outline-info mb-3"
+                        href="{% url 'services:detail_making' making.pk %}"
+                        class="btn btn-outline-warning mb-3"
                         title="Подробности по заказу"
                 >Узнать подробности</a>
                 {% endif %}
