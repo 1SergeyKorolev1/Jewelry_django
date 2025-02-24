@@ -1,3 +1,6 @@
+let input_weight = document.getElementsByName('weight')[0];
+let input_weight_label = input_weight.previousElementSibling;
+
 function check_input() {
     let input_material_value = document.getElementsByName('material')[0].value;
     let input_sample_gold = document.getElementsByName('sample_gold')[0];
@@ -32,10 +35,27 @@ function check_input() {
     }
 }
 
+function check_input_weight() {
+    if (input_weight.value == '0') {
+        input_weight_label.innerText = 'Ноль грамм стоят 0 руб... можете проверить)'
+        input_weight_label.style.color = "red";
+    } else if (input_weight.value.charAt(0) == '-') {
+        input_weight_label.innerText = 'При расчете округлиться до положительного'
+        input_weight_label.style.color = "red";
+    } else {
+        input_weight_label.innerText = 'Вес в граммах:'
+        input_weight_label.style.color = "black";
+    }
+}
+
 check_input();
 
 
 let input_material = document.getElementsByName('material')[0];
 input_material.addEventListener('change', function (e) {
     check_input();
+})
+
+input_weight.addEventListener('change', function (e) {
+    check_input_weight();
 })

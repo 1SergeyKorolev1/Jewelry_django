@@ -5,12 +5,19 @@ let input_image_two = document.getElementsByName('image_two')[0];
 let description_label = input_description.previousElementSibling;
 let image_one_label = input_image_one.previousElementSibling;
 let image_two_label = input_image_two.previousElementSibling;
+let input_weight_label = input_weight.previousElementSibling;
 
 function check_input() {
-    if (input_weight.value){
+    if (input_weight.value && input_weight.value != '0' && input_weight.value.charAt(0) != '-'){
         input_description.style.display = 'block';
         description_label.style.display = 'block';
+        input_weight_label.innerText = 'Вес в граммах:'
+        input_weight_label.style.color = "black";
     } else {
+        if (input_weight.value == '0' || input_weight.value.charAt(0) == '-') {
+            input_weight_label.innerText = 'Нельзя указывать 0 и значения ниже'
+            input_weight_label.style.color = "red";
+        }
         input_description.style.display = 'none';
         description_label.style.display = 'none';
         input_image_one.style.display = 'none';
@@ -24,6 +31,10 @@ function check_input_two() {
     if (input_description.value) {
         input_image_one.style.display = 'block';
         image_one_label.style.display = 'block';
+        console.log('111');
+    } else {
+        input_image_one.style.display = 'none';
+        image_one_label.style.display = 'none';
     }
 }
 
@@ -31,6 +42,9 @@ function check_input_any() {
     if (input_image_one.value) {
         input_image_two.style.display = 'block';
         image_two_label.style.display = 'block';
+    } else {
+        input_image_two.style.display = 'none';
+        image_two_label.style.display = 'none';
     }
 }
 
