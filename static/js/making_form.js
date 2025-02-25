@@ -8,16 +8,22 @@ let image_two_label = input_image_two.previousElementSibling;
 let input_weight_label = input_weight.previousElementSibling;
 
 function check_input() {
-    if (input_weight.value && input_weight.value != '0' && input_weight.value.charAt(0) != '-'){
+    if (input_weight.value){
         input_description.style.display = 'block';
         description_label.style.display = 'block';
         input_weight_label.innerText = 'Вес в граммах:'
         input_weight_label.style.color = "black";
-    } else {
-        if (input_weight.value == '0' || input_weight.value.charAt(0) == '-') {
-            input_weight_label.innerText = 'Нельзя указывать 0 и значения ниже'
+        if (input_weight.value == '0') {
+            input_weight_label.innerText = 'Ноль грамм стоят 0 руб... можете проверить)'
             input_weight_label.style.color = "red";
         }
+        if (input_weight.value.charAt(0) == '-') {
+            input_weight_label.innerText = 'При расчете округлиться до положительного'
+            input_weight_label.style.color = "red";
+        }
+    } else {
+        input_weight_label.innerText = 'Вес в граммах:'
+        input_weight_label.style.color = "black";
         input_description.style.display = 'none';
         description_label.style.display = 'none';
         input_image_one.style.display = 'none';

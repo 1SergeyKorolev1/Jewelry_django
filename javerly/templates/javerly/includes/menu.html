@@ -8,7 +8,7 @@
             />
     </a>
 
-    <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+    <nav id="menu_home" class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 text-dark text-decoration-none" href="{% url 'javerly:home' %}">home</a>
         {% if user.is_authenticated %}
         <form method="post" action="{% url 'users:logout' %}">
