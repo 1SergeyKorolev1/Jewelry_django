@@ -11,9 +11,9 @@
         <div class="card bg-body bg-opacity-50 col m-2" style="min-width: 185px">
             <div class="text-center" style="">
                 <p class="m-2 text-warning" style="-webkit-text-stroke: 0.3px black">{{ object }}</p>
-                <p class="m-0 text-warning" style="-webkit-text-stroke: 0.3px black">Приблизительная стоимость
-                    изготовления:</p>
-                <p class="text-warning" style="-webkit-text-stroke: 0.3px black">💰 {{ object.result }} руб.</p>
+                <p class="m-0 text-warning" style="-webkit-text-stroke: 0.3px black">Чтобы узнать, Приблизительную стоимость 💰
+                    изготовления, передайте заказ на рассмотрение в нашу группу следуя
+                    инструкциям:</p>
                 <img src="{{ object.image_one | media_filter }}" class="col-2 rounded mt-1 mb-3"
                      style="max-width: max-content; width: 70%">
                 <p class="text-info mb-0">Чтоб передать информацию о заказе в работу</p>
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <a
-                    href="{% url 'services:delete_making' object.pk %}"
+                    href="{% url 'services:delete_repair' object.pk %}"
                     type="button"
                     class="jewelry_play_del btn-close bg-danger"
                     aria-label="Close"

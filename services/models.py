@@ -39,6 +39,53 @@ platinum_samples = {
     '800': '800',
 }
 
+class Repair(models.Model):
+    material = models.CharField(
+        default=materials['gold'],
+        max_length=150,
+        verbose_name='выберите материал',
+        help_text='',
+        choices=materials,
+        error_messages='Поле обязательно для заполнения'
+    )
+    description = models.TextField(
+        verbose_name='Опишите проблему / Прокомментируйте заказ',
+        max_length=300
+    )
+    image_one = ResizedImageField(
+        verbose_name='фото вашего изделия',
+        size=[600, 600],
+        quality=88,
+        upload_to='users/repair/',
+    )
+    image_two = ResizedImageField(
+        verbose_name='фото вашего изделия',
+        size=[600, 600],
+        quality=88,
+        upload_to='users/repair/',
+        **NULLABLE
+    )
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        help_text='укажите владельца',
+        verbose_name='владелец',
+        **NULLABLE
+    )
+    number = models.CharField(
+        max_length=100,
+        verbose_name='номер заказа',
+        **NULLABLE
+    )
+
+    def __str__(self):
+        # Строковое отображение объекта
+        return f'Материал: {self.material}.'
+
+    class Meta:
+        verbose_name = 'Ремонт'
+        verbose_name_plural = 'Ремонт'
+
 
 class Sale(models.Model):
     material = models.CharField(
@@ -88,6 +135,11 @@ class Sale(models.Model):
         on_delete=models.CASCADE,
         help_text='укажите владельца',
         verbose_name='владелец',
+        **NULLABLE
+    )
+    number = models.CharField(
+        max_length=100,
+        verbose_name='номер заказа',
         **NULLABLE
     )
 

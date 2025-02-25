@@ -2,8 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, ListView, DeleteView, DetailView
-from services.models import Sale, Making
-from services.forms import SaleFormCreate, MakingFormCreate
+from services.models import Sale, Making, Repair
+from services.forms import SaleFormCreate, MakingFormCreate, RepairFormCreate
 from services.functions.functions_get_price import get_sale_price, get_making_price
 from services.functions.get_random_number import get_random_number
 
@@ -42,14 +42,50 @@ class AllCalculationsList(LoginRequiredMixin, ListView):
         user = self.request.user
         sale = Sale.objects.filter(owner=user)
         making = Making.objects.filter(owner=user)
+        repair = Repair.objects.filter(owner=user)
 
         context['sale_list'] = sale
         context['making_list'] = making
+        context['repair_list'] = repair
         return context
+
+def get_number_sale(r_, pk):
+    sale_list_objects = Sale.objects.all()
+    sale_list_number = []
+    file_list_number = get_number_order_list()
+    for s_ in sale_list_objects:
+        if s_.number:
+            sale_list_number.append(s_.number)
+    for f_ in file_list_number:
+        if f_ not in sale_list_number:
+            sale_list_number.append(f_)
+
+    sale = Sale.objects.get(pk=pk)
+    if sale.number:
+        pass
+    else:
+        random_number = get_random_number()
+        if random_number not in sale_list_number:
+            sale.number = random_number
+            set_number_order_list(random_number)
+        else:
+            sale.number = random_number + random_number
+            set_number_order_list(random_number + random_number)
+        sale.save()
+
+    return redirect(reverse('services:all_calculations'))
+
+class SaleDtailView(LoginRequiredMixin, DetailView):
+    model = Sale
 
 class SaleDeleteView(LoginRequiredMixin, DeleteView):
     model = Sale
     success_url = reverse_lazy('services:all_calculations')
+
+    def form_valid(self, form):
+        sale = self.object
+        delete_number_in_order_list(sale.number)
+        return super().form_valid(form)
 
 class MakingDeleteView(LoginRequiredMixin, DeleteView):
     model = Making
@@ -76,12 +112,16 @@ class MakingCreate(LoginRequiredMixin, CreateView):
         )
         return super().form_valid(form)
 
-def get_number(r_, pk):
+def get_number_making(r_, pk):
     making_list_objects = Making.objects.all()
     making_list_number = []
+    file_list_number = get_number_order_list()
     for m_ in making_list_objects:
         if m_.number:
             making_list_number.append(m_.number)
+    for f_ in file_list_number:
+        if f_ not in making_list_number:
+            making_list_number.append(f_)
 
     making = Making.objects.get(pk=pk)
     if making.number:
@@ -101,6 +141,56 @@ def get_number(r_, pk):
 
 class MakingDtailView(LoginRequiredMixin, DetailView):
     model = Making
+
+class RepairCreate(LoginRequiredMixin, CreateView):
+    model = Repair
+    form_class = RepairFormCreate
+    success_url = reverse_lazy('services:all_calculations')
+
+    def form_valid(self, form):
+        repair = form.instance
+        repair.owner = self.request.user
+        return super().form_valid(form)
+
+class RepairDeleteView(LoginRequiredMixin, DeleteView):
+    model = Repair
+    success_url = reverse_lazy('services:all_calculations')
+
+    def form_valid(self, form):
+        repair = self.object
+        repair.image_one.delete(False)
+        repair.image_two.delete(False)
+        delete_number_in_order_list(repair.number)
+        return super().form_valid(form)
+
+def get_number_repair(r_, pk):
+    repair_list_objects = Repair.objects.all()
+    repair_list_number = []
+    file_list_number = get_number_order_list()
+    for r_ in repair_list_objects:
+        if r_.number:
+            repair_list_number.append(r_.number)
+    for f_ in file_list_number:
+        if f_ not in repair_list_number:
+            repair_list_number.append(f_)
+
+    repair = Repair.objects.get(pk=pk)
+    if repair.number:
+        pass
+    else:
+        random_number = get_random_number()
+        if random_number not in repair_list_number:
+            repair.number = random_number
+            set_number_order_list(random_number)
+        else:
+            repair.number = random_number + random_number
+            set_number_order_list(random_number + random_number)
+        repair.save()
+
+    return redirect(reverse('services:all_calculations'))
+
+class RepairDtailView(LoginRequiredMixin, DetailView):
+    model = Repair
 
 def start_bot(r_):
     start_vk_bot.delay()

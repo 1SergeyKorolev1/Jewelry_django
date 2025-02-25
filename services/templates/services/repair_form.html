@@ -1,0 +1,30 @@
+{% extends 'javerly/base.html' %}
+{% load my_tags %}
+{% block content %}
+{% load static %}
+<div class="row mt-5 mr-3 ml-3">
+    <div class="col-6 mx-auto" style="width: 90%; max-width: 600px">
+        <div class="card bg-body p-2 bg-opacity-50">
+            <div class="card-body">
+                <div class="pricing-header p-3 pb-md-4 mx-auto text-center col-10">
+                    <h3>Сформировать заказ на ремонт</h3>
+                </div>
+                <p class="text-center mt-3">Цену вы сможете узнать только после того как отправите заказ на рассмотрение
+                на странице "Расчеты" в главном меню выше...</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-warning">
+                        Сформировать
+                    </button>
+                </form>
+                <p class="text-center mt-3 text-danger">После того как вы получите номер заказа на странице
+                "Расчеты" в главном меню выше - вы сможете отправить заказ на рассмотрение мастеру
+                    в нашу группу ВК, следуя инструкциям, которые вы найдете перейдя по кнопке
+                "Узнать подробность" на блоке с нужным вам заказом на странице "Расчеты"</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/making_form.js' %}"></script>
+{% endblock %}

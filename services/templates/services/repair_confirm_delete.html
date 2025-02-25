@@ -1,0 +1,23 @@
+{% extends 'javerly/base.html' %}
+
+{% block content %}
+<div class="row mt-5">
+    <div class="col-6 mx-auto">
+        <div class="card bg-body p-2 bg-opacity-50">
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    <h3>Хотите удалить заказ?</h3>
+                    <h3>{{ object }}</h3>
+                    <button type="submit" class="btn btn-outline-secondary mt-2">
+                        Подтвердить
+                    </button>
+                    <a class="btn btn-warning mt-2" href="{% url 'services:all_calculations' %}">
+                        Отмена
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
