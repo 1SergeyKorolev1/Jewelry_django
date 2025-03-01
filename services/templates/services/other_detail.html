@@ -11,8 +11,8 @@
         <div class="card bg-body bg-opacity-50 col m-2" style="min-width: 185px">
             <div class="text-center" style="">
                 <p class="m-2 text-warning" style="-webkit-text-stroke: 0.3px black">{{ object }}</p>
-                <p class="m-0 text-warning" style="-webkit-text-stroke: 0.3px black">Чтобы узнать, Приблизительную стоимость 💰
-                    ремонта, передайте заказ на рассмотрение в нашу группу следуя
+                <p class="m-0 text-warning" style="-webkit-text-stroke: 0.3px black">Чтобы узнать, Приблизительную стоимость 💰,
+                    передайте заказ на рассмотрение в нашу группу следуя
                     инструкциям:</p>
                 <img src="{{ object.image_one | media_filter }}" class="col-2 rounded mt-1 mb-3"
                      style="max-width: max-content; width: 70%">
@@ -44,7 +44,7 @@
                 </div>
             </div>
             <a
-                    href="{% url 'services:delete_repair' object.pk %}"
+                    href="{% url 'services:delete_other' object.pk %}"
                     type="button"
                     class="jewelry_play_del btn-close bg-danger"
                     aria-label="Close"
