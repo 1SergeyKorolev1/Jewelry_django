@@ -9,7 +9,7 @@ from vk_api.utils import get_random_id
 
 from config.settings import TOKEN_VK
 from services.functions.number_order import get_number_order_list
-from services.models import Making, Sale, Repair
+from services.models import Making, Sale, Repair, Other
 
 project_path = pathlib.Path(__file__).parent.parent.parent
 
@@ -49,6 +49,7 @@ def get_order_message(number, info):
     making = Making.objects.filter(number=number)
     sale = Sale.objects.filter(number=number)
     repair = Repair.objects.filter(number=number)
+    other = Other.objects.filter(number=number)
     if making:
         return (f'Привет {first_name} {last_name} 🙌\n\n'
                 f'ЗАКАЗ НА ИЗГОТОВЛЕНИЕ\n'
@@ -87,6 +88,15 @@ def get_order_message(number, info):
                 f'\nПередан на рассмотрение мастеру. 🤝\n'
                 f'Ожидайте ответа (ответ придет в этой беседе)\n\n'
                 f'👀 Также вы можете отправить - help - чтоб получить дополнительную информацию')
+    if other:
+        return (f'Привет {first_name} {last_name} 🙌\n\n'
+                f'Ваш заказ\n'
+                f'Номер: №{number}\n'
+                f'Описание: {other[0].description}\n'
+                f'Материал: {other[0].material}\n'
+                f'\nПередан на рассмотрение мастеру. 🤝\n'
+                f'Ожидайте ответа (ответ придет в этой беседе)\n\n'
+                f'👀 Также вы можете отправить - help - чтоб получить дополнительную информацию')
     return 'Непредвиденная ошибка... Мы разберемся с ней как только прочтем этот диалог...'
 
 
@@ -94,6 +104,7 @@ def get_order_image(number):
     making = Making.objects.filter(number=number)
     sale = Sale.objects.filter(number=number)
     repair = Repair.objects.filter(number=number)
+    other = Other.objects.filter(number=number)
     if making:
         if making[0]:
             return making[0].image_one
@@ -103,6 +114,11 @@ def get_order_image(number):
     if repair:
         if repair[0]:
             return repair[0].image_one
+    if other:
+        if other[0]:
+            if repair[0].image_one:
+                return repair[0].image_one
+            return 0
     return 0
 
 @shared_task
